@@ -1,0 +1,5 @@
+[package]
+
+name = "passyvm"
+version = "0.0.1"
+authors = ["Pascal Hartig <phartig@twitter.com>"]
