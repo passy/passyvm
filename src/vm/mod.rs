@@ -1,9 +1,12 @@
-type ByteCode = u8;
+pub mod bytecode;
 
+use self::bytecode::ByteCode;
+
+#[allow(dead_code)]
 pub struct VM {
-    ip: u32, // instruction pointer register
-    sp: u32, // stack pointer register
-    fp: u32,  // frame pointer register
+    ip: usize, // instruction pointer register
+    sp: usize, // stack pointer register
+    fp: usize,  // frame pointer register
 
     code: [ByteCode; 16], // word-addressable code memory as bytecodes
     stack: [u32; 256], // operand stack, grows upwards, fixed in size for now
@@ -15,11 +18,17 @@ impl VM {
         VM { ip: 0, sp: -1, fp: -1, code: code, stack: [0; 256] }
     }
 
-    pub fn computer(&self) {
-        println!("beep boop beep");
+    pub fn computer(&mut self) {
 
-        for code in self.code.iter() {
-            println!("code: {}", code);
+        while self.ip < self.code.len() {
+            let opcode = self.code[self.ip];
+            self.ip += 1;
+
+            match opcode {
+                ByteCode::NOOP => continue,
+                ByteCode::HALT => break,
+                _ => panic!("Received unknown opcode {:?}!", opcode)
+            }
         }
     }
 }

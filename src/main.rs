@@ -4,8 +4,10 @@
 
 mod vm;
 
+use vm::bytecode::ByteCode;
+
 fn main() {
-    let code = [0; 16];
-    let my_vm = vm::VM::new(code);
+    let mut code = [ByteCode::NOOP; 16];
+    let mut my_vm = vm::VM::new(code);
     my_vm.computer();
 }
