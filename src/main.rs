@@ -5,6 +5,7 @@
 mod vm;
 
 fn main() {
-    let my_vm = vm::VM::new();
+    let code = [0; 16];
+    let my_vm = vm::VM::new(code);
     my_vm.computer();
 }
